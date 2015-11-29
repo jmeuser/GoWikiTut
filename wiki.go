@@ -7,16 +7,19 @@ import (
 	"regexp"
 )
 
+// A wiki Page has a Title and a Body.
 type Page struct {
 	Title string
 	Body  []byte
 }
 
+// save() the Body of a Page to Title.txt
 func (p *Page) save() error {
 	filename := p.Title + ".txt"
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
+// loadPage from title.txt
 func loadPage(title string) (*Page, error) {
 	filename := title + ".txt"
 	body, err := ioutil.ReadFile(filename)
@@ -26,6 +29,7 @@ func loadPage(title string) (*Page, error) {
 	return &Page{Title: title, Body: body}, nil
 }
 
+// cache templates
 var templates = template.Must(template.ParseFiles("edit.html", "view.html"))
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
