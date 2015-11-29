@@ -1,3 +1,4 @@
+// This implements the wiki web app from https://golang.org/doc/articles/wiki/
 package main
 
 import (
